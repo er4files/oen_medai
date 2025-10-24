@@ -14,6 +14,7 @@ class PatientCard extends StatelessWidget {
 
     return Card(
       elevation: 3,
+      color: Colors.white, // ✅ gunakan "color" bukan "backgroundColor"
       margin: const EdgeInsets.only(bottom: 16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(

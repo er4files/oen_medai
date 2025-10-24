@@ -28,13 +28,10 @@ class LoginView extends GetView<LoginController> {
               SizedBox(height: 8),
               Text(
                 'Provide your credentials to sign in as a doctor',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[600],
-                ),
+                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
               ),
               SizedBox(height: 40),
-              
+
               // Username Field dengan Label di Atas
               Text(
                 'Username',
@@ -52,14 +49,17 @@ class LoginView extends GetView<LoginController> {
                   hintStyle: TextStyle(color: Colors.grey[400]),
                   filled: true,
                   fillColor: Colors.white,
-                  prefixIcon: Icon(Icons.person_outlined, color: Colors.grey[400]),
+                  prefixIcon: Icon(
+                    Icons.person_outlined,
+                    color: Colors.grey[500],
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.grey[300]!),
+                    borderSide: BorderSide(color: Colors.grey[500]!),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.grey[300]!),
+                    borderSide: BorderSide(color: Colors.grey[500]!),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -79,40 +79,49 @@ class LoginView extends GetView<LoginController> {
                 ),
               ),
               SizedBox(height: 8),
-              Obx(() => TextField(
-                controller: controller.passwordController,
-                obscureText: !controller.isPasswordVisible.value,
-                decoration: InputDecoration(
-                  hintText: "Type your password",
-                  hintStyle: TextStyle(color: Colors.grey[400]),
-                  filled: true,
-                  fillColor: Colors.white,
-                  prefixIcon: Icon(Icons.lock_outlined, color: Colors.grey[400]),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      controller.isPasswordVisible.value 
-                        ? Icons.visibility_outlined 
-                        : Icons.visibility_off_outlined,
-                      color: Colors.grey[400],
+              Obx(
+                () => TextField(
+                  controller: controller.passwordController,
+                  obscureText: !controller.isPasswordVisible.value,
+                  decoration: InputDecoration(
+                    hintText: "Type your password",
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    filled: true,
+                    fillColor: Colors.white,
+                    prefixIcon: Icon(
+                      Icons.lock_outlined,
+                      color: Colors.grey[500],
                     ),
-                    onPressed: () {
-                      controller.isPasswordVisible.value = !controller.isPasswordVisible.value;
-                    },
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.grey[300]!),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.grey[300]!),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Color(0xFF00C9A7), width: 2),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        controller.isPasswordVisible.value
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
+                        color: Colors.grey[500],
+                      ),
+                      onPressed: () {
+                        controller.isPasswordVisible.value =
+                            !controller.isPasswordVisible.value;
+                      },
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: Colors.grey[500]!),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: Colors.grey[500]!),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: Color(0xFF00C9A7),
+                        width: 2,
+                      ),
+                    ),
                   ),
                 ),
-              )),
+              ),
               SizedBox(height: 16),
 
               // Remember Me dan Forgot Password
@@ -121,27 +130,32 @@ class LoginView extends GetView<LoginController> {
                 children: [
                   Row(
                     children: [
-                      Obx(() => Transform.scale(
-                        scale: 0.8, // Membuat toggle lebih kecil
-                        child: Switch(
-                          value: controller.rememberMe.value,
-                          onChanged: (value) {
-                            controller.rememberMe.value = value;
-                          },
-                          activeColor: Color(0xFF00C9A7),
-                          activeTrackColor: Color(0xFF00C9A7).withOpacity(0.5),
-                          inactiveThumbColor: Colors.white, // Point warna putih saat tidak aktif
-                          inactiveTrackColor: Colors.grey[300], // Background abu-abu saat tidak aktif
-                          trackOutlineColor: MaterialStateProperty.all(Colors.transparent), // Hilangkan outline
+                      Obx(
+                        () => Transform.scale(
+                          scale: 0.8, // Membuat toggle lebih kecil
+                          child: Switch(
+                            value: controller.rememberMe.value,
+                            onChanged: (value) {
+                              controller.rememberMe.value = value;
+                            },
+                            activeColor: Color(0xFF00C9A7),
+                            activeTrackColor: Color(
+                              0xFF00C9A7,
+                            ).withOpacity(0.5),
+                            inactiveThumbColor: Colors
+                                .white, // Point warna putih saat tidak aktif
+                            inactiveTrackColor: Colors
+                                .grey[300], // Background abu-abu saat tidak aktif
+                            trackOutlineColor: MaterialStateProperty.all(
+                              Colors.transparent,
+                            ), // Hilangkan outline
+                          ),
                         ),
-                      )),
+                      ),
                       SizedBox(width: 4),
                       Text(
                         'Remember Me',
-                        style: TextStyle(
-                          color: Colors.grey[700],
-                          fontSize: 14,
-                        ),
+                        style: TextStyle(color: Colors.grey[700], fontSize: 14),
                       ),
                     ],
                   ),
@@ -161,48 +175,48 @@ class LoginView extends GetView<LoginController> {
               SizedBox(height: 24),
 
               // Sign In Button dengan Gradient
-              Obx(() => Container(
-                width: double.infinity,
-                height: 56,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF00C9A7), // Hijau tosca
-                      Color(0xFF0070C9), // Biru
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: ElevatedButton(
-                  onPressed: controller.isLoading.value
-                      ? null
-                      : () {
-                          controller.isLoading.value = true;
-                          controller.login();
-                        },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+              Obx(
+                () => Container(
+                  width: double.infinity,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFF00C9A7), // Hijau tosca
+                        Color(0xFF0070C9), // Biru
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                     ),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  child: controller.isLoading.value
-                      ? CircularProgressIndicator(
-                          color: Colors.white,
-                        )
-                      : Text(
-                          'SIGN IN',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                  child: ElevatedButton(
+                    onPressed: controller.isLoading.value
+                        ? null
+                        : () {
+                            controller.isLoading.value = true;
+                            controller.login();
+                          },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: controller.isLoading.value
+                        ? CircularProgressIndicator(color: Colors.white)
+                        : Text(
+                            'SIGN IN',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
+                  ),
                 ),
-              )),
+              ),
             ],
           ),
         ),

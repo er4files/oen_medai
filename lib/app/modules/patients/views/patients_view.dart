@@ -17,26 +17,14 @@ class PatientsView extends StatelessWidget {
           children: [
             // 🔹 Filter Section
             Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF00C9A7), Color(0xFF0070C9)],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
+              color: Colors.white,
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Filter Pasien',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 16),
+
+                  // 🔹 Dropdowns
                   Row(
                     children: [
                       Expanded(
@@ -46,7 +34,7 @@ class PatientsView extends StatelessWidget {
                           items: ['Semua', 'PERAWATAN IBU & ANAK 1'],
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 12),
                       Expanded(
                         child: _buildFilterDropdown(
                           label: 'Status Perawatan',
@@ -56,23 +44,40 @@ class PatientsView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 20),
+
+                  // 🔹 Search Input
+                  Text(
+                    'Cari Pasien',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                   TextField(
                     onChanged: controller.searchPatients,
-                    style: const TextStyle(color: Colors.black),
                     decoration: InputDecoration(
-                      hintText: 'Cari pasien...',
-                      hintStyle: const TextStyle(color: Colors.grey),
+                      hintText: 'Ketik nama pasien...',
+                      hintStyle: TextStyle(color: Colors.grey[400]),
                       filled: true,
                       fillColor: Colors.white,
-                      prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
-                      ),
+                      prefixIcon: Icon(Icons.search, color: Colors.grey[500]),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
+                        borderSide: BorderSide(color: Colors.grey[500]!),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.grey[500]!),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(
+                          color: Color(0xFF00C9A7), // tosca seperti login
+                          width: 2,
+                        ),
                       ),
                     ),
                   ),
@@ -115,39 +120,59 @@ class PatientsView extends StatelessWidget {
     );
   }
 
+  // 🔹 Custom Dropdown mirip TextField
   Widget _buildFilterDropdown({
     required String label,
     required RxString value,
     required List<String> items,
   }) {
     return Obx(
-      () => Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
+      () => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
             ),
-          ],
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: DropdownButton<String>(
-          value: value.value,
-          isExpanded: true,
-          underline: const SizedBox(),
-          items: items.map((String item) {
-            return DropdownMenuItem<String>(
-              value: item,
-              child: Text(item, style: const TextStyle(fontSize: 13)),
-            );
-          }).toList(),
-          onChanged: (String? newValue) {
-            if (newValue != null) value.value = newValue;
-          },
-        ),
+          ),
+          const SizedBox(height: 8),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.grey[500]!),
+            ),
+            child: DropdownButton<String>(
+              value: value.value,
+              isExpanded: true,
+              underline: const SizedBox(),
+              icon: const Icon(
+                Icons.keyboard_arrow_down_rounded,
+                color: Colors.grey,
+              ),
+
+              // ✅ Tambahkan properti ini agar background dropdown popup berwarna putih
+              dropdownColor: Colors.white,
+
+              items: items.map((String item) {
+                return DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(
+                    item,
+                    style: const TextStyle(fontSize: 13, color: Colors.black),
+                  ),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                if (newValue != null) value.value = newValue;
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
