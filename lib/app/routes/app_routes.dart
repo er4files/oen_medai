@@ -10,6 +10,7 @@ abstract class Routes {
   static const PHARMACY = _Paths.PHARMACY;
   static const SPEECH_AI = _Paths.SPEECH_AI;
   static const NAVBAR = _Paths.NAVBAR;
+  static const CPPT = _Paths.CPPT;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const PHARMACY = '/pharmacy';
   static const SPEECH_AI = '/speech-ai';
   static const NAVBAR = '/navbar';
+  static const CPPT = '/cppt';
 }

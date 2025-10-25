@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/cppt/bindings/cppt_binding.dart';
+import '../modules/cppt/views/cppt_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.NAVBAR,
       page: () => const NavbarView(),
       binding: NavbarBinding(),
+    ),
+    GetPage(
+      name: _Paths.CPPT,
+      page: () => const CpptView(),
+      binding: CpptBinding(),
     ),
   ];
 }
